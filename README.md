@@ -1,6 +1,6 @@
 # Webjet Movie Solution
 
-A full-stack movie price comparison app built with .NET 8 (backend) and React 19 (frontend). Users can browse movies, view details, and compare prices from two providers (Cinemaworld and Filmworld). The solution is designed for resilience, performance, and a great user experience—even if external APIs are flaky.
+A full-stack movie price comparison app built with .NET 8 (backend) and React 19 (frontend). Users can browse movies, view details, and compare prices from two providers (Cinemaworld and Filmworld). The solution is designed for resilience, performance, and a great user experience, even if external APIs are flaky.
 
 ---
 
@@ -60,6 +60,12 @@ A full-stack movie price comparison app built with .NET 8 (backend) and React 19
    - The app will run at: **http://localhost:3000**
    - It proxies API requests to the backend at **http://localhost:5000**
 
+### Backend Unit Tests
+
+To run unit tests:
+   ```
+   dotnet test Webjet.Movie.API.Tests
+   ```
 ---
 
 ## Backend Configuration (appsettings.json)
@@ -98,16 +104,17 @@ A full-stack movie price comparison app built with .NET 8 (backend) and React 19
 
 ## API Endpoints
 
-- `GET /movies` — Paginated, searchable, sortable list of all movies (merged from both providers)
-- `GET /movies/details?title={title}` — Detailed info and price comparison for a movie
+- `GET /movies` : Paginated, searchable, sortable list of all movies (merged from both providers)
+- `GET /movies/details?title={title}` : Detailed info and price comparison for a movie
 
 ---
 
 ## Assumptions
 
+- This project uses local configuration files for simplicity. For production environments, Azure Key Vault for sensitive configuration (API keys) and Azure App Configuration for feature flags and application settings shall be used.
 - External APIs return a manageable number of movies (can be cached in memory without performance issues)
 - Movie and price data does not change frequently; in-memory caching is effective
-- The main movie list does **not** show the lowest price—only the details page does
+- The main movie list does **not** show the lowest price, only the details page does
 - Backend APIs are public for now; in the future, authentication (e.g., JWT) may be added
 - All providers return exactly the same titles for each movie (matching by title is reliable)
 - API keys are kept server-side and never exposed to the frontend
@@ -121,9 +128,9 @@ A full-stack movie price comparison app built with .NET 8 (backend) and React 19
 
 ## Project Structure
 
-- **Webjet.Movie.API** — .NET 8 backend (Carter, MediatR, Polly, MemoryCache, Swagger, HealthChecks)
-- **Webjet.Movie.API.Tests** — xUnit, Moq, FluentAssertions for backend unit tests
-- **webjet-movie-web** — React 19 + TypeScript frontend (Tailwind CSS, Axios, React Router)
+- **Webjet.Movie.API** : .NET 8 backend (Carter, MediatR, Polly, MemoryCache, Swagger, HealthChecks)
+- **Webjet.Movie.API.Tests** : xUnit, Moq, FluentAssertions for backend unit tests
+- **webjet-movie-web** : React 19 + TypeScript frontend (Tailwind CSS, Axios, React Router)
 
 ---
 
